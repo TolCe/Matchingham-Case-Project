@@ -1,3 +1,4 @@
+using UnityEngine;
 using Zenject;
 
 public class SuccessChecker : IInitializable
@@ -6,9 +7,9 @@ public class SuccessChecker : IInitializable
 
     [Inject] private LevelManager _levelManager;
 
-    public int AmountToSuccess { get; private set; }
+    private int _amountToSuccess;
 
-    public Enums.ObjectTypes GoalItemType { get; private set; }
+    private Enums.ObjectTypes _goalItemType;
 
     public void Initialize()
     {
@@ -22,26 +23,26 @@ public class SuccessChecker : IInitializable
 
     private void SetGoal(LevelData levelData)
     {
-        GoalItemType = levelData.GoalType;
-        AmountToSuccess = levelData.GoalAmount;
+        _goalItemType = levelData.GoalType;
+        _amountToSuccess = levelData.GoalAmount;
 
-        MergeObjectData data = MergeObjectsPool.Instance.GetItemDataByType(GoalItemType);
+        MergeObjectData data = MergeObjectsPool.Instance.GetItemDataByType(_goalItemType);
 
-        (ScreenController.Instance.GetScreen(Enums.UIScreenTypes.Gameplay) as GameplayScreen).Initialize(data.Icon, AmountToSuccess);
+        (ScreenController.Instance.GetScreen(Enums.UIScreenTypes.Gameplay) as GameplayScreen).Initialize(data.Icon, _amountToSuccess);
     }
 
     public void OnMerge(MergeObject item)
     {
-        if (item.ObjectType != GoalItemType)
+        if (item.ObjectType != _goalItemType)
         {
             return;
         }
 
-        AmountToSuccess--;
+        _amountToSuccess--;
 
-        (ScreenController.Instance.GetScreen(Enums.UIScreenTypes.Gameplay) as GameplayScreen).UpdateTargetAmount(AmountToSuccess);
+        (ScreenController.Instance.GetScreen(Enums.UIScreenTypes.Gameplay) as GameplayScreen).UpdateTargetAmount(_amountToSuccess);
 
-        if (AmountToSuccess <= 0)
+        if (_amountToSuccess <= 0)
         {
             _signalBus.Fire(new GameSignals.CallLevelEnd(true));
         }

@@ -11,12 +11,7 @@ public class MergeObjectsMovementManager : IInitializable
 
     public void Initialize()
     {
-        _signalBus.Subscribe<GameSignals.CallInputStart>(OnInputGiven);
         _signalBus.Subscribe<GameSignals.CallInputRelease>(OnInputReleased);
-    }
-
-    private void OnInputGiven()
-    {
     }
 
     private void OnInputReleased()

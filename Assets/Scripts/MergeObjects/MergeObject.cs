@@ -1,6 +1,5 @@
 using DG.Tweening;
 using UnityEngine;
-using Zenject;
 using System.Threading.Tasks;
 
 public class MergeObject : MonoBehaviour
@@ -23,11 +22,11 @@ public class MergeObject : MonoBehaviour
         transform.DOKill();
     }
 
-    public async void Initialize(Enums.ObjectTypes itemType)
+    public void Initialize(Enums.ObjectTypes itemType)
     {
         gameObject.SetActive(true);
 
-        await SetPosition(new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 0.6f), Random.Range(-3f, 3f)));
+        SetPosition(new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 0.6f), Random.Range(-3f, 3f)));
 
         ObjectType = itemType;
 
@@ -35,7 +34,7 @@ public class MergeObject : MonoBehaviour
         _meshCollider.enabled = true;
     }
 
-    public async Task AttachToTile(Tile tile, float duration = 0f)
+    public void AttachToTile(Tile tile, float duration = 0f)
     {
         AttachedTile?.AttachItem(null);
 
@@ -45,16 +44,16 @@ public class MergeObject : MonoBehaviour
         {
             AttachedTile.AttachItem(this);
 
-            await SetPosition(AttachedTile.GetObjectContainerPosition(), duration);
+            SetPosition(AttachedTile.GetObjectContainerPosition(), duration);
         }
     }
 
-    public async Task SetPosition(Vector3 pos, float time = 0f)
+    public void SetPosition(Vector3 pos, float time = 0f)
     {
         transform.DOKill();
 
         transform.DORotate(Vector3.zero, time);
-        await transform.DOMove(pos, time).AsyncWaitForCompletion();
+        transform.DOMove(pos, time);
     }
 
     public void OnSelected()

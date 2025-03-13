@@ -9,7 +9,7 @@ public class MergeManager
 
     [Inject] private SuccessChecker _successChecker;
 
-    public async void CheckForMerge()
+    public void CheckForMerge()
     {
         List<MergeObject> itemsToCheck = new List<MergeObject>();
 
@@ -21,7 +21,7 @@ public class MergeManager
             }
         }
 
-        if (itemsToCheck.Count <= 0)
+        if (itemsToCheck.Count <= 2)
         {
             return;
         }
@@ -36,9 +36,10 @@ public class MergeManager
 
                 if (mergedItems.Count >= 3)
                 {
-                    await MergeAnimation(new List<MergeObject>(mergedItems));
-
+                    MergeAnimation(new List<MergeObject>(mergedItems));
                     MergeItems(mergedItems);
+
+                    break;
                 }
             }
             else
@@ -59,20 +60,13 @@ public class MergeManager
         _tilesManager.TidyTiles();
     }
 
-    private async Task MergeAnimation(List<MergeObject> mergedList)
+    private void MergeAnimation(List<MergeObject> mergedList)
     {
         Vector3 midPoint = 0.5f * (mergedList[0].transform.position + mergedList[^1].transform.position);
 
         for (int i = 0; i < mergedList.Count; i++)
         {
-            if (i < mergedList.Count - 1)
-            {
-                mergedList[i].SetPosition(midPoint, 0.1f);
-            }
-            else
-            {
-                await mergedList[i].SetPosition(midPoint, 0.1f);
-            }
+            mergedList[i].SetPosition(midPoint, 0.1f);
         }
     }
 }

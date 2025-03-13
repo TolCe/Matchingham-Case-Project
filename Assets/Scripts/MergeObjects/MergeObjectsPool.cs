@@ -49,6 +49,7 @@ public class MergeObjectsPool : Singleton<MergeObjectsPool>
     public void ReturnItemToPool(MergeObject item)
     {
         item.AttachToTile(null);
+
         _mergeObjectPools[item.ObjectType].Return(item);
     }
 

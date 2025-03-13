@@ -26,13 +26,13 @@ public class TilesManager
         PlaceItem(obj);
     }
 
-    private async void PlaceItem(MergeObject obj)
+    private void PlaceItem(MergeObject obj)
     {
         Tile tile = FindFirstSuitableTile(obj);
 
-        await CreateEmptyTileOnMiddle(tile);
+        CreateEmptyTileOnMiddle(tile);
 
-        await obj.AttachToTile(tile, 0.4f);
+        obj.AttachToTile(tile, 0.4f);
 
         _mergeManager.CheckForMerge();
 
@@ -76,7 +76,7 @@ public class TilesManager
         return suitedTile;
     }
 
-    private async Task CreateEmptyTileOnMiddle(Tile tile)
+    private void CreateEmptyTileOnMiddle(Tile tile)
     {
         if (tile.AttachedItem == null)
         {
@@ -89,7 +89,7 @@ public class TilesManager
             {
                 if (TileList[i].AttachedItem != null && TileList[i + 1].AttachedItem == null)
                 {
-                    await TileList[i].AttachedItem.AttachToTile(TileList[i + 1], 0.02f);
+                    TileList[i].AttachedItem.AttachToTile(TileList[i + 1], 0.02f);
                 }
 
                 if (TileList[i] == tile)
