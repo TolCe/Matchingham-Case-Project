@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
-using static UnityEditor.Progress;
 
 public class MergeManager
 {
