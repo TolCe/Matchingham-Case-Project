@@ -8070,7 +8070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dffb07aa7b92cb54b98def36ae8f8874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tileData: {fileID: 11400000, guid: 69f835dcb109cc045ab6090a764ce94d, type: 2}
+  _tileData: {fileID: 11400000, guid: ee601f05d8f8d07449510318d6ed6b2d, type: 2}
   _tileContainer: {fileID: 50321351}
 --- !u!1 &1631420939
 GameObject:
@@ -10462,7 +10462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74809295450184448bf2f68ca1a62484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectDatabase: {fileID: 11400000, guid: c96998c74f22f634ab4d3cc4b563692e, type: 2}
+  _objectDatabase: {fileID: 11400000, guid: f99423c92ceb4e543b78aed82f9904d6, type: 2}
   _itemContainer: {fileID: 170688458}
 --- !u!1 &2061264952
 GameObject:
